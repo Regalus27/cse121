@@ -14,11 +14,7 @@ const square = {
 
 // game loop
 function gameLoop() {
-    document.body.onkeydown = function(event) {
-        if (event.code == "Space") {
-            square.dy = square.dySpace;
-        }
-    }
+    listenInputs();
 
     square.y += square.dy;
     square.dy += square.gravity;
@@ -31,7 +27,7 @@ function gameLoop() {
 }
 
 // Make sure square stays in canvas and reset accel if collision
-function keepSquareInCanvas () {
+function keepSquareInCanvas() {
     if (square.y > canvas.height - square.sideLength) {
         square.y = canvas.height - square.sideLength;
         square.dy = 0;
@@ -39,6 +35,15 @@ function keepSquareInCanvas () {
     else if (square.y < square.sideLength) {
         square.y = square.sideLength;
         square.dy *= -.5;
+    }
+}
+
+// Listen for any inputs
+function listenInputs() {
+    document.body.onkeydown = function(event) {
+        if (event.code == "Space") {
+            square.dy = square.dySpace;
+        }
     }
 }
 
